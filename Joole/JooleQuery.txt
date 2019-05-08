@@ -1,0 +1,32 @@
+create database dbJoole
+
+create table tblUser(
+User_ID int identity primary key,
+User_Name varchar(500),
+User_Email varchar(255),
+User_Image varbinary(max),
+User_Password varchar(500)
+)
+
+create table tblProduct(
+Product_ID int identity primary key,
+Product_Name varchar(500),
+Product_Image varbinary(max),
+Manufacturer_Name varchar(500),
+Category_Name varchar(500),
+Model varchar(500),
+Model_Year int,
+Series int,
+Use_Type varchar(500),
+Application_Place varchar(500),
+Mounting_Location varchar(500),
+Accessories varchar(500),
+Fans_Airflow int,
+Fans_MaxPower int,
+Fans_MaxSpeed int,
+Fans_SeepDiameter int,
+TVs_ScreenSize int,
+TVs_Resolution varchar(500),
+TVs_Color varchar(500),
+TVs_Types varchar(500),
+)

@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JooleMarketPlaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblCategory">
+    <Key>
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Category_ID" Type="Int32" Nullable="false" />
+    <Property Name="Category_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblSubCategories" Relationship="Self.FK__tblSubCat__Categ__36B12243" FromRole="tblCategory" ToRole="tblSubCategory" />
+  </EntityType>
+  <EntityType Name="tblCity">
+    <Key>
+      <PropertyRef Name="City_ID" />
+    </Key>
+    <Property Name="City_ID" Type="Int32" Nullable="false" />
+    <Property Name="City_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="State_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblState" Relationship="Self.FK__tblCity__State_I__30F848ED" FromRole="tblCity" ToRole="tblState" />
+    <NavigationProperty Name="tblProjects" Relationship="Self.FK__tblProjec__Proje__2F10007B" FromRole="tblCity" ToRole="tblProject" />
+  </EntityType>
+  <EntityType Name="tblCredential">
+    <Key>
+      <PropertyRef Name="Credential_ID" />
+    </Key>
+    <Property Name="Credential_ID" Type="Int32" Nullable="false" />
+    <Property Name="User_Type" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.FK__tblUser__Credent__2D27B809" FromRole="tblCredential" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="Department_ID" />
+    </Key>
+    <Property Name="Department_ID" Type="Int32" Nullable="false" />
+    <Property Name="Manufacturer_ID" Type="Int32" Nullable="false" />
+    <Property Name="Department_Name" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Department_Phone" Type="Int32" />
+    <Property Name="Department_Email" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblManufacturer" Relationship="Self.FK__tblDepart__Manuf__35BCFE0A" FromRole="tblDepartment" ToRole="tblManufacturer" />
+  </EntityType>
+  <EntityType Name="tblDocuemnt">
+    <Key>
+      <PropertyRef Name="Document_ID" />
+    </Key>
+    <Property Name="Document_ID" Type="Int32" Nullable="false" />
+    <Property Name="Document_Folder_Path" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.FK__tblProduc__Docum__34C8D9D1" FromRole="tblDocuemnt" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="tblManufacturer">
+    <Key>
+      <PropertyRef Name="Manufacturer_ID" />
+    </Key>
+    <Property Name="Manufacturer_ID" Type="Int32" Nullable="false" />
+    <Property Name="Manufacturer_Name" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Manufacturer_Web" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="User_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblDepartments" Relationship="Self.FK__tblDepart__Manuf__35BCFE0A" FromRole="tblManufacturer" ToRole="tblDepartment" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK__tblManufa__User___31EC6D26" FromRole="tblManufacturer" ToRole="tblUser" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.FK__tblProduc__Manuf__32E0915F" FromRole="tblManufacturer" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="tblProduct">
+    <Key>
+      <PropertyRef Name="Product_ID" />
+    </Key>
+    <Property Name="Product_ID" Type="Int32" Nullable="false" />
+    <Property Name="Manufacturer_ID" Type="Int32" />
+    <Property Name="SubCategory_ID" Type="Int32" />
+    <Property Name="Document_ID" Type="Int32" />
+    <Property Name="Product_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Product_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Manufacturer_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Category_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Model" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Model_Year" Type="Int32" />
+    <Property Name="Series" Type="Int32" />
+    <Property Name="Use_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Application_Place" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Mounting_Location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Accessories" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Fans_Airflow" Type="Int32" />
+    <Property Name="Fans_MaxPower" Type="Int32" />
+    <Property Name="Fans_MaxSpeed" Type="Int32" />
+    <Property Name="Fans_SeepDiameter" Type="Int32" />
+    <Property Name="TVs_ScreenSize" Type="Int32" />
+    <Property Name="TVs_Resolution" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TVs_Color" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TVs_Types" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblDocuemnt" Relationship="Self.FK__tblProduc__Docum__34C8D9D1" FromRole="tblProduct" ToRole="tblDocuemnt" />
+    <NavigationProperty Name="tblManufacturer" Relationship="Self.FK__tblProduc__Manuf__32E0915F" FromRole="tblProduct" ToRole="tblManufacturer" />
+    <NavigationProperty Name="tblSubCategory" Relationship="Self.FK__tblProduc__SubCa__33D4B598" FromRole="tblProduct" ToRole="tblSubCategory" />
+  </EntityType>
+  <EntityType Name="tblProject">
+    <Key>
+      <PropertyRef Name="Project_ID" />
+    </Key>
+    <Property Name="Project_ID" Type="Int32" Nullable="false" />
+    <Property Name="Project_Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="User_Id" Type="Int32" Nullable="false" />
+    <Property Name="Project_Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Project_Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Project_City" Type="Int32" Nullable="false" />
+    <Property Name="Project_State" Type="Int32" Nullable="false" />
+    <Property Name="Project_Size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Client_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblCity" Relationship="Self.FK__tblProjec__Proje__2F10007B" FromRole="tblProject" ToRole="tblCity" />
+    <NavigationProperty Name="tblState" Relationship="Self.FK__tblProjec__Proje__300424B4" FromRole="tblProject" ToRole="tblState" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK__tblProjec__User___2E1BDC42" FromRole="tblProject" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblProjToProd">
+    <Key>
+      <PropertyRef Name="Project_ID" />
+      <PropertyRef Name="Product_ID" />
+    </Key>
+    <Property Name="Project_ID" Type="Int32" Nullable="false" />
+    <Property Name="Product_ID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblProperty">
+    <Key>
+      <PropertyRef Name="Property_ID" />
+    </Key>
+    <Property Name="Property_ID" Type="Int32" Nullable="false" />
+    <Property Name="Property_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsType" Type="Boolean" Nullable="false" />
+    <Property Name="IsTechSpec" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblPropertyValue">
+    <Key>
+      <PropertyRef Name="Property_ID" />
+      <PropertyRef Name="Product_ID" />
+    </Key>
+    <Property Name="Property_ID" Type="Int32" Nullable="false" />
+    <Property Name="Product_ID" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblState">
+    <Key>
+      <PropertyRef Name="State_ID" />
+    </Key>
+    <Property Name="State_ID" Type="Int32" Nullable="false" />
+    <Property Name="State_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblCities" Relationship="Self.FK__tblCity__State_I__30F848ED" FromRole="tblState" ToRole="tblCity" />
+    <NavigationProperty Name="tblProjects" Relationship="Self.FK__tblProjec__Proje__300424B4" FromRole="tblState" ToRole="tblProject" />
+  </EntityType>
+  <EntityType Name="tblSubCategory">
+    <Key>
+      <PropertyRef Name="SubCategory_ID" />
+    </Key>
+    <Property Name="SubCategory_ID" Type="Int32" Nullable="false" />
+    <Property Name="Category_ID" Type="Int32" Nullable="false" />
+    <Property Name="SubCategory_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblCategory" Relationship="Self.FK__tblSubCat__Categ__36B12243" FromRole="tblSubCategory" ToRole="tblCategory" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.FK__tblProduc__SubCa__33D4B598" FromRole="tblSubCategory" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="tblTechSpecFilter">
+    <Key>
+      <PropertyRef Name="property_ID" />
+      <PropertyRef Name="SubCategory_ID" />
+    </Key>
+    <Property Name="property_ID" Type="Int32" Nullable="false" />
+    <Property Name="SubCategory_ID" Type="Int32" Nullable="false" />
+    <Property Name="Min_Value" Type="Int32" />
+    <Property Name="Max_Value" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblTypeFilter">
+    <Key>
+      <PropertyRef Name="Properyt_ID" />
+      <PropertyRef Name="SubCategory_ID" />
+    </Key>
+    <Property Name="Properyt_ID" Type="Int32" Nullable="false" />
+    <Property Name="SubCategory_ID" Type="Int32" Nullable="false" />
+    <Property Name="Type_Name" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Type_Options" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="User_ID" />
+    </Key>
+    <Property Name="User_ID" Type="Int32" Nullable="false" />
+    <Property Name="Credential_ID" Type="Int32" />
+    <Property Name="User_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="User_Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="User_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="User_Password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblCredential" Relationship="Self.FK__tblUser__Credent__2D27B809" FromRole="tblUser" ToRole="tblCredential" />
+    <NavigationProperty Name="tblManufacturers" Relationship="Self.FK__tblManufa__User___31EC6D26" FromRole="tblUser" ToRole="tblManufacturer" />
+    <NavigationProperty Name="tblProjects" Relationship="Self.FK__tblProjec__User___2E1BDC42" FromRole="tblUser" ToRole="tblProject" />
+  </EntityType>
+  <Association Name="FK__tblSubCat__Categ__36B12243">
+    <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
+    <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCategory">
+        <PropertyRef Name="Category_ID" />
+      </Principal>
+      <Dependent Role="tblSubCategory">
+        <PropertyRef Name="Category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblCity__State_I__30F848ED">
+    <End Role="tblState" Type="Self.tblState" Multiplicity="1" />
+    <End Role="tblCity" Type="Self.tblCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="State_ID" />
+      </Principal>
+      <Dependent Role="tblCity">
+        <PropertyRef Name="State_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProjec__Proje__2F10007B">
+    <End Role="tblCity" Type="Self.tblCity" Multiplicity="1" />
+    <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCity">
+        <PropertyRef Name="City_ID" />
+      </Principal>
+      <Dependent Role="tblProject">
+        <PropertyRef Name="Project_City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblUser__Credent__2D27B809">
+    <End Role="tblCredential" Type="Self.tblCredential" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCredential">
+        <PropertyRef Name="Credential_ID" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="Credential_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblDepart__Manuf__35BCFE0A">
+    <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="1" />
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblManufacturer">
+        <PropertyRef Name="Manufacturer_ID" />
+      </Principal>
+      <Dependent Role="tblDepartment">
+        <PropertyRef Name="Manufacturer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__Docum__34C8D9D1">
+    <End Role="tblDocuemnt" Type="Self.tblDocuemnt" Multiplicity="0..1" />
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDocuemnt">
+        <PropertyRef Name="Document_ID" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="Document_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblManufa__User___31EC6D26">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="User_ID" />
+      </Principal>
+      <Dependent Role="tblManufacturer">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__Manuf__32E0915F">
+    <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="0..1" />
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblManufacturer">
+        <PropertyRef Name="Manufacturer_ID" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="Manufacturer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__SubCa__33D4B598">
+    <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="0..1" />
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSubCategory">
+        <PropertyRef Name="SubCategory_ID" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="SubCategory_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProjec__Proje__300424B4">
+    <End Role="tblState" Type="Self.tblState" Multiplicity="1" />
+    <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblState">
+        <PropertyRef Name="State_ID" />
+      </Principal>
+      <Dependent Role="tblProject">
+        <PropertyRef Name="Project_State" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProjec__User___2E1BDC42">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="User_ID" />
+      </Principal>
+      <Dependent Role="tblProject">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JooleMarketPlaceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
+    <EntitySet Name="tblCities" EntityType="Self.tblCity" />
+    <EntitySet Name="tblCredentials" EntityType="Self.tblCredential" />
+    <EntitySet Name="tblDepartments" EntityType="Self.tblDepartment" />
+    <EntitySet Name="tblDocuemnts" EntityType="Self.tblDocuemnt" />
+    <EntitySet Name="tblManufacturers" EntityType="Self.tblManufacturer" />
+    <EntitySet Name="tblProducts" EntityType="Self.tblProduct" />
+    <EntitySet Name="tblProjects" EntityType="Self.tblProject" />
+    <EntitySet Name="tblProjToProds" EntityType="Self.tblProjToProd" />
+    <EntitySet Name="tblProperties" EntityType="Self.tblProperty" />
+    <EntitySet Name="tblPropertyValues" EntityType="Self.tblPropertyValue" />
+    <EntitySet Name="tblStates" EntityType="Self.tblState" />
+    <EntitySet Name="tblSubCategories" EntityType="Self.tblSubCategory" />
+    <EntitySet Name="tblTechSpecFilters" EntityType="Self.tblTechSpecFilter" />
+    <EntitySet Name="tblTypeFilters" EntityType="Self.tblTypeFilter" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <AssociationSet Name="FK__tblSubCat__Categ__36B12243" Association="Self.FK__tblSubCat__Categ__36B12243">
+      <End Role="tblCategory" EntitySet="tblCategories" />
+      <End Role="tblSubCategory" EntitySet="tblSubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblCity__State_I__30F848ED" Association="Self.FK__tblCity__State_I__30F848ED">
+      <End Role="tblState" EntitySet="tblStates" />
+      <End Role="tblCity" EntitySet="tblCities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProjec__Proje__2F10007B" Association="Self.FK__tblProjec__Proje__2F10007B">
+      <End Role="tblCity" EntitySet="tblCities" />
+      <End Role="tblProject" EntitySet="tblProjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblUser__Credent__2D27B809" Association="Self.FK__tblUser__Credent__2D27B809">
+      <End Role="tblCredential" EntitySet="tblCredentials" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblDepart__Manuf__35BCFE0A" Association="Self.FK__tblDepart__Manuf__35BCFE0A">
+      <End Role="tblManufacturer" EntitySet="tblManufacturers" />
+      <End Role="tblDepartment" EntitySet="tblDepartments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__Docum__34C8D9D1" Association="Self.FK__tblProduc__Docum__34C8D9D1">
+      <End Role="tblDocuemnt" EntitySet="tblDocuemnts" />
+      <End Role="tblProduct" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblManufa__User___31EC6D26" Association="Self.FK__tblManufa__User___31EC6D26">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblManufacturer" EntitySet="tblManufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__Manuf__32E0915F" Association="Self.FK__tblProduc__Manuf__32E0915F">
+      <End Role="tblManufacturer" EntitySet="tblManufacturers" />
+      <End Role="tblProduct" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__SubCa__33D4B598" Association="Self.FK__tblProduc__SubCa__33D4B598">
+      <End Role="tblSubCategory" EntitySet="tblSubCategories" />
+      <End Role="tblProduct" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProjec__Proje__300424B4" Association="Self.FK__tblProjec__Proje__300424B4">
+      <End Role="tblState" EntitySet="tblStates" />
+      <End Role="tblProject" EntitySet="tblProjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProjec__User___2E1BDC42" Association="Self.FK__tblProjec__User___2E1BDC42">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblProject" EntitySet="tblProjects" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
